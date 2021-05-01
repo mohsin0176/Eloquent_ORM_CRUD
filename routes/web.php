@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 Route::get('todo_show','TodoController@show');
 Route::get('todo_delete/{id}','TodoController@destroy');
+Route::get('todo_create','TodoController@create');
+Route::post('todo_submit','TodoController@store');
+Route::get('todo_edit/{id}','TodoController@edit');
+Route::put('todo_update/{id}','TodoController@update')->name('todo.update');

@@ -24,7 +24,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todo_create');
     }
 
     /**
@@ -35,7 +35,11 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res=new Todo;
+        $res->name=request->input('name');
+        $res->save();
+        $request->session()->flash('msg','Data Submitted');
+        return redirect('todo_show');
     }
 
     /**
@@ -55,9 +59,9 @@ class TodoController extends Controller
      * @param  \App\Models\todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function edit(todo $todo)
+    public function edit(todo $todo,$id)
     {
-        //
+        return view('todo_edit')->with('todoArr',Todo::find($id));
     }
 
     /**
@@ -69,7 +73,11 @@ class TodoController extends Controller
      */
     public function update(Request $request, todo $todo)
     {
-        //
+        $res=Todo::find($request->id);
+        $res->name=$request->input('name');
+        $res->save();
+        $request->session()->flash('msg','Data Submitted');
+        return redirect('todo_show');
     }
 
     /**
